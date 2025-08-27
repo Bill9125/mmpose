@@ -30,6 +30,8 @@ from rtmpose3d import *  # noqa: F401, F403
 
 
 def parse_args():
+    # python ./demo/body3d_img2pose_demo.py demo/rtmdet_m_640-8xb32_coco-person.py https://download.openmmlab.com/mmpose/v1/projects/rtmpose/rtmdet_m_8xb32-100e_coco-obj365-person-235e8209.pth configs/rtmw3d-x_8xb32_cocktail14-384x288.py rtmw3d-x_8xb64_cocktail14-384x288-b0a0eab7_20240626.pth --input ./input/vision2.avi --output-root ./output
+
     parser = ArgumentParser()
     parser.add_argument('det_config', help='Config file for detection')
     parser.add_argument('det_checkpoint', help='Checkpoint file for detection')
@@ -52,7 +54,7 @@ def parse_args():
     parser.add_argument(
         '--disable-rebase-keypoint',
         action='store_true',
-        default=False,
+        default=True,
         help='Whether to disable rebasing the predicted 3D pose so its '
         'lowest keypoint has a height of 0 (landing on the ground). Rebase '
         'is useful for visualization when the model do not predict the '
@@ -81,7 +83,7 @@ def parse_args():
     parser.add_argument(
         '--save-predictions',
         action='store_true',
-        default=False,
+        default=True,
         help='Whether to save predicted results')
     parser.add_argument(
         '--device', default='cuda:0', help='Device used for inference')
@@ -110,7 +112,7 @@ def parse_args():
     parser.add_argument(
         '--radius',
         type=int,
-        default=3,
+        default=1,
         help='Keypoint radius for visualization')
     parser.add_argument(
         '--online',
